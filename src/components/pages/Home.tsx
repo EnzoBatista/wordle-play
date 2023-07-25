@@ -1,6 +1,6 @@
 import { Box, BoxProps, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { MainContainer } from "../templates";
+import { Header, MainContainer } from "../templates";
 
 const StyledHome = styled(Box)<BoxProps>(({ theme }) => ({
   minHeight: "100vh",
@@ -13,7 +13,7 @@ const Home = () => {
       <MainContainer>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            [HEADER HERE]
+            <Header />
           </Grid>
           <Grid item xs={12}>
             [BOARD HERE]
