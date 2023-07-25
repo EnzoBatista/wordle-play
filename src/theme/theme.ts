@@ -23,63 +23,74 @@ declare module "@mui/material/styles" {
 }
 
 export const lightPalette = {
-  yellow: {
-    // main: "#CEB02C",
-    // dark: "",
-    // light: "",
+  typography: {
+    h1: {
+      fontSize: "40px",
+      fontWeight: "600",
+      color: "#202537",
+      fontStyle: "normal",
+      lineHeight: "normal",
+      letterSpacing: "3px",
+    },
   },
-  green: {
-    main: "#66A060",
-    // dark: "",
-    // light: "",
-  },
-  gray: {
-    main: "#dbddde",
-    // dark: "#939B9F",
-    // light: "#F3F3F3",
-  },
-  overlay: {
-    main: "rgba(243, 243, 243, 0.89)",
-    // dark: "",
-    // light: "",
-  },
-  bgPrimary: {
-    main: "#ffffff",
+  palette: {
+    yellow: {
+      // main: "#CEB02C",
+      // dark: "",
+      // light: "",
+    },
+    green: {
+      main: "#66A060",
+      // dark: "",
+      // light: "",
+    },
+    gray: {
+      main: "#dbddde",
+      // dark: "#939B9F",
+      // light: "#F3F3F3",
+    },
+    overlay: {
+      main: "rgba(243, 243, 243, 0.89)",
+      // dark: "",
+      // light: "",
+    },
+    bgPrimary: {
+      dark: "#F3F3F3",
+      light: "#F9F9F9",
+    },
   },
 };
 
 const darkPalette = {
-  gray: {
-    main: "#939B9F",
-    dark: "#939B9F",
-    light: "#565F7E",
-  },
   typography: {
     h1: {
-      fontSize: 20,
-      color: "red",
+      fontSize: "40px",
+      fontWeight: "600",
+      color: "black",
     },
   },
-  bgPrimary: {
-    main: "#939B9F",
+  palette: {
+    gray: {
+      main: "#939B9F",
+      dark: "#939B9F",
+      light: "#565F7E",
+    },
+    bgPrimary: {
+      main: "#939B9F",
+    },
   },
 };
 
 export const getDesignTokens = (mode: PaletteMode) => ({
-  typography: {
-    h1: {
-      fontSize: "40px",
-    },
-  },
-  palette: {
-    mode,
-    ...(mode === "dark"
-      ? {
-          ...lightPalette,
-          ...darkPalette,
-        }
-      : {
-          ...lightPalette,
-        }),
-  },
+  // palette: {
+  mode,
+  ...(mode === "dark"
+    ? {
+        ...lightPalette,
+        ...darkPalette,
+      }
+    : {
+        ...lightPalette,
+      }),
+  // },
 });
