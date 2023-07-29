@@ -1,13 +1,8 @@
-import {
-  Box,
-  BoxProps,
-  Container,
-  Grid,
-  GridProps,
-  autocompleteClasses,
-} from "@mui/material";
+import { Box, BoxProps, Container, Grid, GridProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Key } from "..";
+import { Suspense, useContext, useEffect } from "react";
+import { WordleContext } from "../../../store";
 
 const StyledBoard = styled(Box)<BoxProps>(({ theme }) => ({
   display: "flex",
@@ -21,25 +16,44 @@ const StyledBoard = styled(Box)<BoxProps>(({ theme }) => ({
 
 const StyledKeyWrapper = styled(Grid)<GridProps>(({ theme }) => ({
   display: "flex",
-  flexWrap: 'wrap',
+  flexWrap: "wrap",
   flexDirection: "row",
   justifyContent: "center",
 }));
 
-const DUMMY_LETTERS = [
-  "a","p","r","e","m","i","o","t","a","s","w",
-  "a","p","r","t","a","s","i","o","w","e","m","i","o","w",
-]
-
 const Board = () => {
+  const { keyPressInputHandler, boardState } = useContext(WordleContext);
+
+  // Callback function triggered by keydown event
+  const onKeyDownHandler = (event: any) => keyPressInputHandler(event.key);
+
+  // Manage keydown events
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDownHandler, false);
+    return () => {
+      document.removeEventListener("keydown", onKeyDownHandler, false);
+    };
+  }, [onKeyDownHandler]);
+
   return (
     <StyledBoard>
       <Container>
-        <StyledKeyWrapper item xs={12}>
-          {DUMMY_LETTERS.map((letter, index) => {
-            return<Key key={`${letter}_${index}`} keyCode={letter} border={true} bgColor="red" />
-          })}
-        </StyledKeyWrapper>
+        <Suspense>
+          <StyledKeyWrapper item xs={12}>
+            {boardState.words
+              .flat()
+              .map((letter: string | undefined, index: any) => {
+                return (
+                  <Key
+                    key={`${letter}_${index}`}
+                    keyCode={letter}
+                    border={true}
+                    bgColor="red"
+                  />
+                );
+              })}
+          </StyledKeyWrapper>
+        </Suspense>
       </Container>
     </StyledBoard>
   );

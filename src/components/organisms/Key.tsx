@@ -25,10 +25,9 @@ type KeyType = {
 };
 
 const Key = ({ keyCode, bgColor, onClick }: KeyType) => {
-  console.log(bgColor);
   return (
     <StyledKey onClick={onClick} bgcolor={bgColor}>
-      {keyCode?.toUpperCase()}
+      {keyCode}
     </StyledKey>
   );
 };
